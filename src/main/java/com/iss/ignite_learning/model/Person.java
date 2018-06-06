@@ -4,8 +4,12 @@ import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
 /**
  * @program: ignite_learning
- * @author: 李泰郎
  * @create: 2018-06-05 11:15
+ *
+ * 这个类用于表示人，包含三个字段，用于ignite测试
+ * @param: id   人的id
+ * @param: name 人的名称
+ * @param: city_id  人所在城市的id
  **/
 public class Person {
 
@@ -52,8 +56,4 @@ public class Person {
         this.city_id = city_id;
     }
 
-    @Override
-    public String toString(){
-        return "";
-    }
 }

@@ -2,7 +2,6 @@ package com.iss.ignite_learning.javarun;
 
 import com.iss.ignite_learning.model.City;
 import com.iss.ignite_learning.model.Person;
-import com.iss.ignite_learning.model.PersonKey;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.Ignition;
@@ -14,11 +13,15 @@ import java.util.List;
 
 /**
  * @program: ignite_learning
- * @author: 李泰郎
  * @create: 2018-06-06 07:25
+ *
  **/
 public class javaApplication {
 
+    /**
+     * 测试Ignite官方文档中的代码
+     * @param args
+     */
     public static void main(String[] args) {
         // Connecting to the cluster.
         Ignite ignite = Ignition.start();

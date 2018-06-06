@@ -4,8 +4,11 @@ import org.apache.ignite.cache.query.annotations.QuerySqlField;
 
 /**
  * @program: ignite_learning
- * @author: 李泰郎
  * @create: 2018-06-05 11:14
+ *
+ * 这个类用于表示城市，包含两个字段，用于ignite测试
+ * @param: id   城市id
+ * @param: name 城市名称
  **/
 public class City {
 
