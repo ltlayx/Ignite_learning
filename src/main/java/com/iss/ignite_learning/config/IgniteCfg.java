@@ -22,30 +22,48 @@ public class IgniteCfg {
 
     /**
      * Ignite的初始化Bean，这么配置的情况下，Ignite与Spring Boot公用一个JVM，Spring Boot停止时Ignite也随之退出
+     * 该Bean创建了一个节点名称为springDataNode的节点，并启动了Peer类加载器
+     * 创建了一个名为PersonCache的Cache设置其键值对为<Long, City>
+     * 将Cahce放入节点并启动
+     * @return Ignite
+     */
+//    @Bean
+//    public Ignite igniteInit() {
+//        // 配置一个节点的Configuration
+//        IgniteConfiguration cfg = new IgniteConfiguration();
+//
+//        // 设置该节点名称
+//        cfg.setIgniteInstanceName("springDataNode");
+//
+//        // 启用Peer类加载器
+//        cfg.setPeerClassLoadingEnabled(true);
+//
+//        // 创建一个Cache的配置，名称为PersonCache
+//        CacheConfiguration ccfg = new CacheConfiguration("cityCache");
+//
+//        // 设置这个Cache的键值对模型
+//        ccfg.setIndexedTypes(Long.class, City.class);
+//
+//        // 把这个Cache放入springDataNode这个Node中
+//        cfg.setCacheConfiguration(ccfg);
+//
+//        // 设置Ignite启停前后的特定操作
+//        cfg.setLifecycleBeans(new IgniteLifecycleBean());
+//
+//        // 启动这个节点
+//        return Ignition.start(cfg);
+//    }
+
+    /**
+     * 通过配置来启动Ignite节点
      * @return Ignite
      */
     @Bean
     public Ignite igniteInit() {
-        // 配置一个节点的Configuration
-        IgniteConfiguration cfg = new IgniteConfiguration();
-
-        // 设置该节点名称
-        cfg.setIgniteInstanceName("springDataNode");
-
-        // 启用Peer类加载器
-        cfg.setPeerClassLoadingEnabled(true);
-
-        // 创建一个Cache的配置，名称为PersonCache
-        CacheConfiguration ccfg = new CacheConfiguration("cityCache");
-
-        // 设置这个Cache的键值对模型
-        ccfg.setIndexedTypes(Long.class, City.class);
-
-        // 把这个Cache放入springDataNode这个Node中
-        cfg.setCacheConfiguration(ccfg);
+        String cfgPath = "examples/config/example-cache.xml";
 
         // 启动这个节点
-        return Ignition.start(cfg);
+        return Ignition.start(cfgPath);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.iss.ignite_learning.controller;
 
 import org.apache.ignite.Ignite;
+import org.apache.ignite.IgniteCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,7 +19,15 @@ public class TestIgnite {
 
     @GetMapping(value = "/")
     public String testInject() {
-        ignite.log();
+        IgniteCache<Integer, String> cache = ignite.getOrCreateCache("myCacheName");
+
+        for (int i = 0; i < 10; i++) {
+            cache.put(i, Integer.toString(i));
+        }
+
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Got [key=" + i + ", val=" + cache.get(i) + ']');
+        }
         return "";
     }
 
