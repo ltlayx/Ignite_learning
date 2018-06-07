@@ -55,12 +55,12 @@ public class IgniteCfg {
 //    }
 
     /**
-     * 通过配置来启动Ignite节点
+     * 通过配置来启动Ignite节点，传入配置的xml即可启动ignite
      * @return Ignite
      */
     @Bean
     public Ignite igniteInit() {
-        String cfgPath = "examples/config/example-cache.xml";
+        String cfgPath = "examples/config/example-ignite.xml";
 
         // 启动这个节点
         return Ignition.start(cfgPath);

@@ -43,10 +43,10 @@
             <version>2.5.0</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.ignite/ignite-spring -->
+        <!-- https://mvnrepository.com/artifact/org.apache.ignite/ignite-spring-data -->
         <dependency>
             <groupId>org.apache.ignite</groupId>
-            <artifactId>ignite-spring</artifactId>
+            <artifactId>ignite-spring-data</artifactId>
             <version>2.5.0</version>
         </dependency>
 
