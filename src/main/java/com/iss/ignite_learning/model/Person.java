@@ -22,14 +22,18 @@ public class Person {
     @QuerySqlField
     private int city_id;
 
+    @QuerySqlField
+    private Address address;
+
     public Person() {
 
     }
 
-    public Person(int id, String name, int city_id) {
+    public Person(int id, String name, int city_id, Address address) {
         this.id = id;
         this.name = name;
         this.city_id = city_id;
+        this.address = address;
     }
 
     public int getId() {
@@ -56,4 +60,21 @@ public class Person {
         this.city_id = city_id;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city_id=" + city_id +
+                ", address=" + address.getName() +
+                '}';
+    }
 }

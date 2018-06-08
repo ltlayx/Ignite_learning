@@ -66,4 +66,19 @@ public class IgniteCfg {
         return Ignition.start(cfgPath);
     }
 
+    /**
+     * 测试Ignite节点启动的生命周期
+     * @return
+     */
+//    @Bean
+//    public Ignite igniteInit() {
+//        IgniteConfiguration cfg = new IgniteConfiguration();
+//
+//        IgniteLifecycleBean igniteLifecycleBean = new IgniteLifecycleBean();
+//
+//        cfg.setLifecycleBeans(igniteLifecycleBean);
+//
+//        return Ignition.start(cfg);
+//    }
+
 }

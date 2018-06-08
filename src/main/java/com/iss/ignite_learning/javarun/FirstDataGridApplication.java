@@ -1,29 +1,62 @@
 package com.iss.ignite_learning.javarun;
 
+import com.iss.ignite_learning.model.Address;
+import com.iss.ignite_learning.model.City;
+import com.iss.ignite_learning.model.Person;
 import org.apache.ignite.Ignite;
 import org.apache.ignite.IgniteCache;
 import org.apache.ignite.Ignition;
+import org.apache.ignite.configuration.CacheConfiguration;
+import org.apache.ignite.configuration.IgniteConfiguration;
+
+import static org.apache.ignite.cache.CacheAtomicityMode.TRANSACTIONAL;
 
 /**
  * @program: ignite_learning
  * @create: 2018-06-06 20:41
  *
- * 使用配置启动Ignite节点，并且向Ignite节点中创建myCache这个Cache，并向其中放入十个元素，最后访问这10个元素
- * 用于测试在当前已经有Ignite节点启动的情况下在启动一个Ignite节点组成集群，并尝试ignite简单的的put以及get操作
+ * 使用配置启动Ignite节点，并且向Ignite节点中创建myCache这个Cache，并向其中放入十个Person对象
+ * 用于测试并启动一个特定的Ignite节点，并尝试ignite简单的的put以及get操作，以及将对象直接作为值放入Cache的操作
+ *
+ * 在IgniteCacheAccess.java中在对这个放入的对象进行访问
  **/
 public class FirstDataGridApplication {
     public static void main(String[] args) {
-        try(Ignite ignite = Ignition.start("examples/config/example-ignite.xml")){
 
-            IgniteCache<Integer, String> cache = ignite.getOrCreateCache("myCache");
+        // 设置一个Ignite配置，将Ignite的节点名称设置
+        IgniteConfiguration igniteCfg = new IgniteConfiguration();
 
-            for (int i = 0; i < 10; i++) {
-                cache.put(i, Integer.toString(i));
-            }
+        igniteCfg.setIgniteInstanceName("firstIgnite");
 
-            for (int i = 0; i < 10; i++) {
-                System.out.println("Got [key=" + i + ", val=" + cache.get(i) + ']');
-            }
-        }
+        igniteCfg.setPeerClassLoadingEnabled(true);
+
+        // 启动Ignite节点
+        Ignite ignite = Ignition.start(igniteCfg);
+
+        // 新生成一个Cache的配置，用于Ignite节点新建一个Cache
+        CacheConfiguration cfg = new CacheConfiguration();
+
+        // 设置Cache的名称为myCache
+        cfg.setName("myCache");
+
+        //cfg.setAtomicityMode(TRANSACTIONAL);
+
+        // 以之前配好的Cache配置启动Ignite节点
+        IgniteCache<String, Person> cache = ignite.getOrCreateCache(cfg);
+
+        // 创建三个City对象用于测试
+//        City wuhan = new City(1, "Wuhan");
+//        City beijing = new City(2, "Beijing");
+//        City shanghai = new City(3, "Shanghai");
+
+        // 创建一个Address对象用于测试
+        Address address = new Address("Test_Address");
+
+        // 创建两个Person对象用于测试
+        Person alice = new Person(1, "Alice", 1, address);
+        Person bob = new Person(2, "Bob", 2, address);
+
+        cache.put(alice.getName(), alice);
+        cache.put(bob.getName(), bob);
     }
 }

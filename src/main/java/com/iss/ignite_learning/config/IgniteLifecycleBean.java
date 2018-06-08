@@ -15,7 +15,16 @@ public class IgniteLifecycleBean implements LifecycleBean {
     @Override
     public void onLifecycleEvent(LifecycleEventType lifecycleEventType) throws IgniteException {
         if (lifecycleEventType == LifecycleEventType.BEFORE_NODE_START){
+            System.out.println("Ignite node begins to start!");
+        }
+        if (lifecycleEventType == LifecycleEventType.AFTER_NODE_START){
             System.out.println("Ignite node started!");
+        }
+        if (lifecycleEventType == LifecycleEventType.BEFORE_NODE_STOP){
+            System.out.println("Ignite node begins to stop!");
+        }
+        if (lifecycleEventType == LifecycleEventType.AFTER_NODE_STOP){
+            System.out.println("Ignite node stop!");
         }
     }
 }
